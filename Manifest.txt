@@ -1,0 +1,8 @@
+.autotest
+CHANGELOG.rdoc
+Manifest.txt
+README.rdoc
+Rakefile
+bin/[%= project.name %]
+lib/[%= project.path %].rb
+test/test_[%= project.underpath %].rb

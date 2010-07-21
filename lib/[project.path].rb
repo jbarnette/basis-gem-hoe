@@ -1,3 +1,3 @@
-class [%= get "project.classname" %]
+class [%= project.classname %]
   VERSION = "1.0.0"
 end

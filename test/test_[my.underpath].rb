@@ -1,7 +1,7 @@
 require "minitest/autorun"
-require "[%= project.path %]"
+require "[%= my.path %]"
 
-class Test[%= project.classname.tr "::", "" %] < MiniTest::Unit::TestCase
+class Test[%= my.classname.tr "::", "" %] < MiniTest::Unit::TestCase
   def test_sanity
     flunk "write tests or I will kneecap you"
   end

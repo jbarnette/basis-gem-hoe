@@ -1,6 +1,6 @@
-= [%= project.name.split(/[-_]/).map(&:capitalize).join " " %]
+= [%= my.name.split(/[-_]/).map(&:capitalize).join " " %]
 
-* http://github.com/jbarnette/[%= project.name %]
+* http://github.com/jbarnette/[%= my.name %]
 
 == Description
 
@@ -12,7 +12,7 @@ FIX (describe your package)
 
 == Installation
 
-    $ gem install [%= project.name %]
+    $ gem install [%= my.name %]
 
 == License
 

@@ -1,6 +1,7 @@
 require "hoe"
 
-Hoe.plugin :doofus, :git
+Hoe.plugins.delete :rubyforge
+Hoe.plugin :doofus, :git, :isolate
 
 Hoe.spec "[%= my.name %]" do
   developer "[%= git 'user.name' %]", "[%= git 'user.email' %]"

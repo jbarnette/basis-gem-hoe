@@ -1,5 +1,38 @@
+# -*- ruby -*-
+
 require "autotest/restart"
+
+class Autotest
+  attr_reader :test_mappings
+  alias_method :old_path_to_classname, :path_to_classname
+
+  ACRONYMS = %w(api)
+
+  def path_to_classname path
+    path.sub!(/^(lib|test)\//, "")
+    path = path[0..-4]
+
+    klass = path.split(File::SEPARATOR).
+      map { |s| s.split("_").
+      map { |n| ACRONYMS.include?(n.downcase) ? n.upcase : n.capitalize }.
+        join }.join "::"
+
+    klass << "Test" unless /Test$/ =~ klass
+    klass
+  end
+end
 
 Autotest.add_hook :initialize do |at|
   at.testlib = "minitest/autorun"
+
+  %w(.autotest .git .gems .rvmrc tmp).each { |p| at.add_exception p }
+
+  at.test_mappings.clear
+
+  at.add_mapping(%r#^test/.*_test\.rb$#)  { |f, _| f              }
+  at.add_mapping(%r#^(Isolate|Rakefile)#) { |f, _| at.known_files }
+
+  at.add_mapping %r#^lib/.*\.rb$# do |f, _|
+    at.files_matching %r|^test/#{f[4..-4]}.*_test\.rb$|
+  end
 end
